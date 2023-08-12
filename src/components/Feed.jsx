@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Typography } from "@mui/material";
 
+import { fetchFromAPI } from "../utils/fetchFromAPI";
 import { Sidebar, Videos } from "./";
 
 const Feed = () => {
+  useEffect(() => {
+    fetchFromAPI(`search?part=snippet&q=${selectedCategory}`);
+  }, []);
+
   return (
     <Stack sx={{ flexDirection: { sx: "column", md: "row" } }}>
       <Box
@@ -32,7 +37,7 @@ const Feed = () => {
           New <span style={{ color: "#FC1503" }}>Videos</span>
         </Typography>
 
-        <Videos />
+        <Videos videos={[]} />
       </Box>
     </Stack>
   );
